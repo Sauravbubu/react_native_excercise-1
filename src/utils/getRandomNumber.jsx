@@ -1,20 +1,36 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
 export const useGenerateRandomNumber = selectedNumber => {
-  const [generatedNumber, setGeneratedNumber] = useState(null); // Initialize with null or another suitable default value
-  const [selectedNumberCopy, setselectedNumberCopy] = useState(selectedNumber);
-  const generateNumberFn = sequence => {
-    let newGeneratedNumber;
-    if (sequence === 'greater') {
-      newGeneratedNumber =
-        Math.floor(Math.random() * (selectedNumber + 100)) + selectedNumber;
-    } else if (sequence === 'smaller') {
-      newGeneratedNumber = Math.floor(Math.random() * selectedNumber);
+  const [gameState, setGameState] = useState({
+    generatedNumber: null,
+    guessCount: 0,
+    history: [],
+  });
+
+  useEffect(() => {
+    const {guessCount, generatedNumber} = gameState;
+    setGameState({
+      ...gameState,
+      history: [...gameState.history, {count: guessCount, generatedNumber}],
+    });
+  }, [gameState.guessCount]);
+
+  const generateNumberFn = (min, max, exclude) => {
+    const {guessCount} = gameState;
+    const rndNum = Math.floor(Math.random() * (max - min)) + min;
+
+    if (rndNum === exclude) {
+      generateNumberFn(min, max, exclude);
     } else {
-      newGeneratedNumber = Math.floor(Math.random() * 100);
+      // setGameState({...gameState, generatedNumber: rndNum});
+      setGameState({
+        ...gameState,
+        guessCount: guessCount + 1, // Increment guess count
+        generatedNumber: rndNum,
+      });
     }
-    // Set the state after evaluating the condition
-    setGeneratedNumber(newGeneratedNumber);
   };
-  return [generatedNumber, generateNumberFn];
+
+  const {generatedNumber, history} = gameState;
+  return [generatedNumber, generateNumberFn, history];
 };

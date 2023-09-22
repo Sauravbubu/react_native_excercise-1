@@ -17,4 +17,13 @@ export const style = StyleSheet.create({
     color: 'white',
   },
   CommonButton: {backgroundColor: 'red', color: 'white'},
+  historyListCard: {
+    display: 'flex',
+    backgroundColor: 'orange',
+    flexDirection: 'row',
+    width: '60%',
+    padding: '5%',
+    marginBottom: '2%',
+    justifyContent: 'space-between',
+  },
 });

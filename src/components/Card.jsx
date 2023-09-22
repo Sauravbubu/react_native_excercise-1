@@ -16,7 +16,6 @@ const Card = ({
         <TextInput
           value={Number(selectedNumber)}
           onChangeText={text => {
-            console.log(text);
             setSelectedNumber(text.toString());
           }}
           keyboardType="numeric"
