@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Button, FlatList, Text, View, Alert} from 'react-native';
 import {useGenerateRandomNumber} from '../../utils/getRandomNumber';
 import {style} from '../../style';
+import CommonButton from '../../components/Button';
 
 const GameScreen = ({selectedNumber}) => {
   const [generatedNumber, generateNumberFn, history] =
@@ -62,31 +63,34 @@ const GameScreen = ({selectedNumber}) => {
     );
   return (
     <View style={style.TopSection}>
-      <View>
-        <Text>{generatedNumber}</Text>
-        <Button
+      <Text style={style.TextBoxView}>{generatedNumber}</Text>
+      <View style={style.ButtonGroup}>
+        <CommonButton
           onPress={handleGreaterButtonClick}
           title="+"
           disabled={gameWon}
+          color="#ec19a2"
         />
-        <Button
+        <CommonButton
           onPress={handleSmallerButtonClick}
           title="-"
           disabled={gameWon}
+          color="#ec19a2"
         />
       </View>
-      {/* <View style={style.TopSection}> */}
-      <FlatList
-        data={history}
-        renderItem={({item, index}) => (
-          <View style={style.historyListCard}>
-            <Text>{index}</Text>
-            <Text>{item.generatedNumber}</Text>
-          </View>
-        )}
-        keyExtractor={(item, index) => index.toString()}
-      />
-      {/* </View> */}
+
+      <View style={style.FlattListWrapper}>
+        <FlatList
+          data={history}
+          renderItem={({item, index}) => (
+            <View style={style.historyListCard}>
+              <Text>{index}</Text>
+              <Text>{item.generatedNumber}</Text>
+            </View>
+          )}
+          keyExtractor={(item, index) => index.toString()}
+        />
+      </View>
     </View>
   );
 };

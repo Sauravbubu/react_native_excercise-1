@@ -1,5 +1,7 @@
 import React from 'react';
-import {Button, Text, TextInput, View} from 'react-native';
+import {Text, TextInput, View} from 'react-native';
+import {style} from '../style';
+import CommonButton from './Button';
 
 const Card = ({
   setDisplaySelection,
@@ -8,12 +10,17 @@ const Card = ({
   displaySelection,
   setNextPage,
 }) => {
+  const handleReset = () => {
+    setSelectedNumber(null); // Reset the selectedNumber state to null
+  };
+
   return (
     <View>
-      <Text>Start a New Game</Text>
-      <View>
-        <Text>Select a Box</Text>
+      <Text style={style.commonText}>Start a New Game</Text>
+      <View style={[style.card, style.shadowProp]}>
+        <Text>Select a Number</Text>
         <TextInput
+          style={style.TextBoxView}
           value={Number(selectedNumber)}
           onChangeText={text => {
             setSelectedNumber(text.toString());
@@ -21,24 +28,26 @@ const Card = ({
           keyboardType="numeric"
           placeholder="Enter a Number"
         />
-        <View>
-          <Button onPress={() => setSelectedNumber(null)} title="Reset" />
-          <Button
+        <View style={style.ButtonGroup}>
+          <CommonButton onPress={handleReset} title="Reset" color="#ec19a2" />
+          <CommonButton
             onPress={() => {
               setDisplaySelection(true);
             }}
             title="Confirm"
+            color="#ec19a2"
           />
         </View>
         {displaySelection && (
-          <View>
+          <View style={style.card}>
             <Text>You selected</Text>
-            <Text>{selectedNumber}</Text>
-            <Button
+            <Text style={style.TextBoxView}>{selectedNumber}</Text>
+            <CommonButton
               onPress={() => {
                 setNextPage(true);
               }}
               title="Start Game"
+              color="#ec19a2"
             />
           </View>
         )}
