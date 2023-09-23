@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-
+//custom Hook for generating random number and storing history
 export const useGenerateRandomNumber = selectedNumber => {
   const [gameState, setGameState] = useState({
     generatedNumber: null,
