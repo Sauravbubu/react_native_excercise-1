@@ -21,16 +21,17 @@ const Card = ({
         <Text>Select a Number</Text>
         <TextInput
           style={style.TextBoxView}
-          value={Number(selectedNumber)}
+          value={selectedNumber}
           onChangeText={text => {
             if (!text) {
               setDisplaySelection(false);
             }
-            setSelectedNumber(text.toString());
+            setSelectedNumber(text);
           }}
           keyboardType="numeric"
           placeholder="Enter a Number"
         />
+
         <View style={style.ButtonGroup}>
           <CommonButton onPress={handleReset} title="Reset" color="#ec19a2" />
           <CommonButton
