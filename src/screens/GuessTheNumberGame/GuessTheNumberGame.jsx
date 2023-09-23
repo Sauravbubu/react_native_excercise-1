@@ -3,7 +3,7 @@ import {BackHandler, Text, View} from 'react-native';
 import Card from '../../components/Card'; // Make sure the import path is correct
 import {style} from '../../style'; // Make sure the import path is correct
 import GameScreen from './GameScreen';
-
+//custom Hook for generating random number and storing history
 const GuessTheNumberGame = () => {
   const [selectedNumber, setSelectedNumber] = useState('');
   const [displaySelection, setDisplaySelection] = useState(false);
