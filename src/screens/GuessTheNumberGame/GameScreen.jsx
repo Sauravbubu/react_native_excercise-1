@@ -4,20 +4,31 @@ import {useGenerateRandomNumber} from '../../utils/getRandomNumber';
 import {style} from '../../style';
 import CommonButton from '../../components/Button';
 
-const GameScreen = ({selectedNumber}) => {
+const GameScreen = ({selectedNumber, setNextPage}) => {
   const [generatedNumber, generateNumberFn, history] =
     useGenerateRandomNumber(selectedNumber);
   const [gameWon, setGameWon] = useState(false);
 
   useEffect(() => {
     // Generate the initial random number when the component loads
-    generateNumberFn(0, 100); // You can choose 'greater' or 'smaller' as appropriate
+    generateNumberFn(); // You can choose 'greater' or 'smaller' as appropriate
   }, []);
 
   useEffect(() => {
     if (generatedNumber == selectedNumber) {
       // The game is won
-      Alert.alert('Congratulations!', `You won in ${history.length} steps.`);
+      Alert.alert(
+        'Congratulations!',
+        `You won in ${history.length} steps.`,
+
+        [
+          {
+            text: 'Restart',
+            onPress: () => setNextPage(false),
+            style: 'cancel',
+          },
+        ],
+      );
       setGameWon(true);
     }
   }, [generatedNumber, selectedNumber, history]);
@@ -25,7 +36,7 @@ const GameScreen = ({selectedNumber}) => {
   const handleGreaterButtonClick = () => {
     if (!gameWon) {
       if (generatedNumber < selectedNumber) {
-        generateNumberFn(selectedNumber, 100, generateNumberFn);
+        generateNumberFn(selectedNumber, generatedNumber);
       } else {
         showAlert();
       }
@@ -35,7 +46,7 @@ const GameScreen = ({selectedNumber}) => {
   const handleSmallerButtonClick = () => {
     if (!gameWon) {
       if (generatedNumber > selectedNumber) {
-        generateNumberFn(0, selectedNumber, generateNumberFn);
+        generateNumberFn(selectedNumber, generatedNumber);
       } else {
         showAlert();
       }
@@ -49,7 +60,7 @@ const GameScreen = ({selectedNumber}) => {
       [
         {
           text: 'Cancel',
-          onPress: () => Alert.alert('Cancel Pressed'),
+          // onPress: () => Alert.alert('Cancel Pressed'),
           style: 'cancel',
         },
       ],

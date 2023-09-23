@@ -21,6 +21,7 @@ export const style = StyleSheet.create({
   },
   TextBoxView: {
     padding: 10,
+    marginTop: 20,
     borderRadius: 10,
     borderWidth: 1,
     width: 100,
@@ -34,7 +35,8 @@ export const style = StyleSheet.create({
     justifyContent: 'center',
     padding: 10,
     width: '80%',
-    marginLeft: '10',
+    marginLeft: 40,
+    borderRadius: 30,
   },
   commonText: {textAlign: 'center', fontWeight: '900'},
   shadowProp: {
@@ -46,7 +48,7 @@ export const style = StyleSheet.create({
   ButtonGroup: {
     display: 'flex',
     justifyContent: 'space-between',
-    width: '60%',
+    width: '80%',
     flexDirection: 'row',
     marginTop: 10,
     marginBottom: 10,
@@ -66,7 +68,7 @@ export const style = StyleSheet.create({
     display: 'flex',
     backgroundColor: 'orange',
     flexDirection: 'row',
-    width: '60%',
+    width: '70%',
     padding: '5%',
     marginBottom: '2%',
     justifyContent: 'space-between',

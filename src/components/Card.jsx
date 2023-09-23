@@ -11,18 +11,21 @@ const Card = ({
   setNextPage,
 }) => {
   const handleReset = () => {
-    setSelectedNumber(null); // Reset the selectedNumber state to null
+    setSelectedNumber(''); // Reset the selectedNumber state to an empty string
   };
 
   return (
     <View>
       <Text style={style.commonText}>Start a New Game</Text>
-      <View style={[style.card, style.shadowProp]}>
+      <View style={style.card}>
         <Text>Select a Number</Text>
         <TextInput
           style={style.TextBoxView}
           value={Number(selectedNumber)}
           onChangeText={text => {
+            if (!text) {
+              setDisplaySelection(false);
+            }
             setSelectedNumber(text.toString());
           }}
           keyboardType="numeric"
@@ -32,7 +35,15 @@ const Card = ({
           <CommonButton onPress={handleReset} title="Reset" color="#ec19a2" />
           <CommonButton
             onPress={() => {
-              setDisplaySelection(true);
+              console.log(selectedNumber, 'selectedNumber');
+              if (
+                selectedNumber &&
+                !isNaN(selectedNumber) &&
+                selectedNumber >= 0 &&
+                selectedNumber <= 100
+              ) {
+                setDisplaySelection(true);
+              }
             }}
             title="Confirm"
             color="#ec19a2"

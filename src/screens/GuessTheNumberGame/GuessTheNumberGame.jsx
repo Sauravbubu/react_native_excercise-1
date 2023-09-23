@@ -25,7 +25,7 @@ const GuessTheNumberGame = () => {
           setNextPage={setNextPage}
         />
       ) : (
-        <GameScreen selectedNumber={selectedNumber} />
+        <GameScreen setNextPage={setNextPage} selectedNumber={selectedNumber} />
       )}
     </View>
   );
